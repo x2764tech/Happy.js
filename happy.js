@@ -68,7 +68,8 @@
         }
         
         if (error) {
-          el.addClass('unhappy').before(errorEl);
+          el.addClass('unhappy');
+          config.placeAfter ? el.after(errorEl) : el.before(errorEl);
           return false;
         } else {
           temp = errorEl.get(0);
