@@ -69,6 +69,7 @@
         
         if (error) {
           el.addClass('unhappy');
+          config.parentErrorClass && el.parent().addClass(config.parentErrorClass);
           config.placeAfter ? el.after(errorEl) : el.before(errorEl);
           return false;
         } else {
@@ -78,6 +79,7 @@
             temp.parentNode.removeChild(temp);
           }
           el.removeClass('unhappy');
+          config.parentErrorClass && el.parent().removeClass(config.parentErrorClass);
           return true;
         }
       };
