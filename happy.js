@@ -13,7 +13,7 @@
       else errorEl = $('<span id="'+error.id+'" class="unhappyMessage">'+error.message+'</span>');
       return errorEl;
     }
-    function handleSubmit() {
+    function handleSubmit(e) {
       var errors = false, i, l;
       for (i = 0, l = fields.length; i < l; i += 1) {
         if (!fields[i].testValid(true)) {
@@ -21,7 +21,7 @@
         }
       }
       if (errors) {
-        if (isFunction(config.unHappy)) config.unHappy();
+        if (isFunction(config.unHappy)) config.unHappy(e);
         return false;
       } else if (config.testMode) {
         if (window.console) console.warn('would have submitted');
