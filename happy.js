@@ -6,7 +6,12 @@
     var fields = [], item;
     
     function getError(error) {
-      return $('<span id="'+error.id+'" class="unhappyMessage">'+error.message+'</span>');
+      var errorEl;
+      if (config.errorElement) errorEl = $(config.errorElement).attr('id', error.id)
+                                                                .addClass('unhappyMessage')
+                                                                .text(error.message);
+      else errorEl = $('<span id="'+error.id+'" class="unhappyMessage">'+error.message+'</span>');
+      return errorEl;
     }
     function handleSubmit() {
       var errors = false, i, l;
