@@ -35,7 +35,7 @@
       var field = $(selector),
         error = {
           message: opts.message,
-          id: selector.slice(1) + '_unhappy'
+          id: selector.replace(/[^\w]/gi, '') + '_unhappy'
         },
         errorEl = $(error.id).length > 0 ? $(error.id) : getError(error);
         
