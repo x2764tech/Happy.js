@@ -91,6 +91,7 @@
           return true;
         }
       };
+      field.unbind((config.when && config.when.replace(/\b(?=\s|$)/g,'.happy')) || 'blur.happy');
       field.bind((config.when && config.when.replace(/\b(?=\s|$)/g,'.happy')) || 'blur.happy', field.testValid);
     }
     
@@ -101,6 +102,7 @@
     if (config.submitButton) {
       $(config.submitButton).click(handleSubmit);
     } else {
+      this.unbind('submit.happy');
       this.bind('submit.happy', handleSubmit);
     }
     return this;
