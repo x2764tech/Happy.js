@@ -91,7 +91,7 @@
           return true;
         }
       };
-      field.bind(config.when || 'blur', field.testValid);
+      field.bind((config.when && config.when.replace(/\b(?=\s|$)/g,'.happy')) || 'blur.happy', field.testValid);
     }
     
     for (item in config.fields) {
@@ -101,7 +101,7 @@
     if (config.submitButton) {
       $(config.submitButton).click(handleSubmit);
     } else {
-      this.bind('submit', handleSubmit);
+      this.bind('submit.happy', handleSubmit);
     }
     return this;
   };
