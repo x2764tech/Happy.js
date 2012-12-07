@@ -3,7 +3,7 @@
     return (''.trim) ? el.val().trim() : $.trim(el.val());
   }
   $.fn.isHappy = function (config) {
-    var fields = [], item;
+    var fields = [], item, activated = false;
     
     function getError(error) {
       var errorEl;
@@ -15,8 +15,9 @@
     }
     function handleSubmit(e) {
       var errors = false, i, l;
+      activated = true;
       for (i = 0, l = fields.length; i < l; i += 1) {
-        if (!fields[i].testValid(true)) {
+        if (!fields[i].testValid()) {
           errors = true;
         }
       }
@@ -42,7 +43,7 @@
       if(!field.length) return; // skip unmatched selector
       
       fields.push(field);
-      field.testValid = function (submit) {
+      field.testValid = function () {
         var val,
           el = $(this),
           gotFunc,
@@ -68,7 +69,7 @@
         gotFunc = ((val.length > 0 || required === 'sometimes') && isFunction(opts.test));
         
         // check if we've got an error on our hands
-        if (submit === true && required === true && val.length === 0) {
+        if (activated === true && required === true && val.length === 0) {
           error = true;
         } else if (gotFunc) {
           error = !opts.test(val, arg);
