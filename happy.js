@@ -75,7 +75,7 @@
           error = !opts.test(val, arg);
         }
         
-        if (!el.prop('disabled') && error) {
+        if (!el.attr('disabled') && error) {
           el.addClass('unhappy');
           config.parentErrorClass && el.parent().addClass(config.parentErrorClass);
           config.placeAfter ? el.after(errorEl) : el.before(errorEl);
