@@ -78,7 +78,7 @@
         if (!el.attr('disabled') && error) {
           el.addClass('unhappy');
           config.parentErrorClass && el.parent().addClass(config.parentErrorClass);
-          config.placeAfter ? el.after(errorEl) : el.before(errorEl);
+          config.insertError ? config.insertError(errorEl, el) : el.before(errorEl);
           return false;
         } else {
           temp = errorEl.get(0);
