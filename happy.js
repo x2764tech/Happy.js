@@ -38,7 +38,7 @@
           message: opts.message,
           id: selector.replace(/[^\w]/gi, '') + '_unhappy'
         },
-        errorEl = $(error.id).length > 0 ? $(error.id) : getError(error);
+        errorEl = $('#'+error.id).length > 0 ? $('#'+error.id) : getError(error);
       
       if(!field.length) return; // skip unmatched selector
       
