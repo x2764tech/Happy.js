@@ -9,7 +9,7 @@
       var errorEl;
       if (config.errorElement) errorEl = $(config.errorElement).attr('id', error.id)
                                                                 .addClass('unhappyMessage')
-                                                                .text(error.message);
+                                                                .html(error.message);
       else errorEl = $('<span id="'+error.id+'" class="unhappyMessage">'+error.message+'</span>');
       return errorEl;
     }
