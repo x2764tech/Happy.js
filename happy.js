@@ -6,7 +6,7 @@
     var fields = [], item, activated = false;
     
     function getError(error) {
-      var errorEl;
+      var errorEl, message = isFunction(error.message) ? error.message() : error.message;
       if (config.errorElement) errorEl = $(config.errorElement).attr('id', error.id)
                                                                 .addClass('unhappyMessage')
                                                                 .html(error.message);
@@ -34,11 +34,11 @@
     }
     function processField(opts, selector) {
       var field = $(selector),
-        error = {
+        err = {
           message: opts.message,
           id: selector.replace(/[^\w]/gi, '') + '_unhappy'
         },
-        errorEl = $('#'+error.id).length > 0 ? $('#'+error.id) : getError(error);
+        errorEl = $('#'+err.id).length > 0 ? $('#'+err.id) : getError(err);
       
       if(!field.length) return; // skip unmatched selector
       
@@ -75,13 +75,17 @@
           error = !opts.test(val, arg);
         }
         
+        temp = errorEl.get(0);
         if (!el.attr('disabled') && error) {
+          if (isFunction(err.message)) {
+            if (temp.parentNode) temp.parentNode.removeChild(temp);
+            errorEl =  getError(err);
+          } 
           el.addClass('unhappy');
           config.parentErrorClass && el.parent().addClass(config.parentErrorClass);
           config.insertError ? config.insertError(errorEl, el) : el.before(errorEl);
           return false;
         } else {
-          temp = errorEl.get(0);
           // this is for zepto
           if (temp.parentNode) {
             temp.parentNode.removeChild(temp);
