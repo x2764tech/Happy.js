@@ -83,7 +83,12 @@
           } 
           el.addClass('unhappy');
           config.parentErrorClass && el.parent().addClass(config.parentErrorClass);
-          config.insertError ? config.insertError(errorEl, el) : el.before(errorEl);
+          if(config.insertError) {
+            config.insertError(errorEl, el);
+          }
+          else {
+            el[config.after?'after':'before'](errorEl);
+          }
           return false;
         } else {
           // this is for zepto
